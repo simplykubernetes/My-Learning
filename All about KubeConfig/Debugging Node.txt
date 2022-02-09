@@ -1,0 +1,4 @@
+aks-agentpool-16372148-vmss000001
+aks-userpool-16372148-vmss000003
+kubectl debug node/aks-userpool-16372148-vmss000003 -it --image=mcr.microsoft.com/aks/fundamental/base-ubuntu:v0.0.11
+kubectl debug node/aks-agentpool-16372148-vmss000001 -it --image=mcr.microsoft.com/aks/fundamental/base-ubuntu:v0.0.11

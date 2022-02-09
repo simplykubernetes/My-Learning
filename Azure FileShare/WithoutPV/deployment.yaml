@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  nginx-deployment
+  namespace: kans
+  labels:
+    app:  nginx-web
+spec:
+  selector:
+    matchLabels:
+      app: nginx-pod
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app:  nginx-pod
+    spec:
+      containers:
+      - name:  nginx-pod
+        image:  nginx
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        imagePullPolicy: Always
+        ports: 
+          - containerPort: 80         
+        volumeMounts:
+          - name: my-azurefile-volume
+            mountPath: "/usr/share/nginx/html/app1"
+      volumes:
+        - name: my-azurefile-volume
+          azureFile:
+            secretName: my-azurefile-secret
+            shareName: rapid7-fileshare/test/html
+            readOnly: false

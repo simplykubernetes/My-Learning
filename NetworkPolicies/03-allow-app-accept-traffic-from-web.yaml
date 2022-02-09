@@ -1,0 +1,14 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: api-allow
+  namespace: kans
+spec:
+  podSelector:
+    matchLabels:
+      role: app
+  ingress:
+  - from:
+      - podSelector:
+          matchLabels:
+            role: web

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  nginx-deployment
+  namespace: kans
+  labels:
+    app:  nginx-web
+spec:
+  selector:
+    matchLabels:
+      app: nginx-pod
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app:  nginx-pod
+    spec:
+      # initContainers:
+        # Init containers are exactly like regular containers, except:
+          # - Init containers always run to completion.
+          # - Each init container must complete successfully before the next one starts.
+      containers:
+      - name:  nginx-pod
+        image:  nginx
+      serviceAccountName: pod-reader-sa

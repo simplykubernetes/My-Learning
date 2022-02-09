@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  nginx-deployment
+  namespace: kans
+  labels:
+    app:  nginx-web
+spec:
+  selector:
+    matchLabels:
+      app: nginx-pod
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app:  nginx-pod
+    spec:
+      containers:
+      - name:  nginx-pod
+        image:  nginx
+
